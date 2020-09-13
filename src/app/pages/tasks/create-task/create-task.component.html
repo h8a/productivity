@@ -1,0 +1,59 @@
+<div class="row d-flex justify-content-center">
+    <div class="col-md-6 mt-5">
+        <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Crear tarea</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form   role="form"
+                    [formGroup]="taskForm"
+                    (ngSubmit)="createTask()">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="inputDescription">Descripción</label>
+                  <input    type="text"
+                            class="form-control"
+                            id="inputDescription"
+                            placeholder="Descripción"
+                            formControlName="description">
+                </div>
+                <div class="form-group">
+                    <label>Duración predeterminadas</label>
+                    <select class="form-control"
+                            formControlName="duration">
+                      <option value="0">Seleccione un tipo</option>
+                      <option [value]="type.id" *ngFor="let type of optionsTask">{{ type.type }} {{ type.text }}</option>
+                    </select>
+                </div>
+                <div class="form-group row">
+                  <label class="col-4">Duración personalizada</label>
+                  <div class="col-4">
+                    <label>Minutos</label>
+                    <input  type="number"
+                            name="inputMinutes"
+                            min="0"
+                            class="form-control"
+                            placeholder="Minutos"
+                            formControlName="optionalMinutes">
+                  </div>
+                  <div class="col-4">
+                    <label>Segundos</label>
+                    <input  type="number"
+                            name="inputSeconds"
+                            min="0"
+                            class="form-control"
+                            placeholder="Segundos"
+                            formControlName="optionalSeconds">
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+
+              <div class="card-footer d-flex justify-content-center">
+                <button type="submit" class="btn btn-lg btn-primary">Crear</button>
+              </div>
+            </form>
+          </div>
+    </div>
+</div>
