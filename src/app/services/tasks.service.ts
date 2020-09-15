@@ -10,8 +10,8 @@ import { TaskModel } from '../models/task.model';
 export class TasksService {
 
   private baseUrl = environment.baseUrl;
-  public timer: number;
-  public descriptionTask: string;
+  public timer = 0;
+  public descriptionTask = '';
 
   constructor( private http: HttpClient ) { }
 
