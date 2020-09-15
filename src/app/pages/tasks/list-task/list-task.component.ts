@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import Swal from 'sweetalert2';
 
 import { TasksService } from '../../../services/tasks.service';
+import { Task } from '../../../interfaces/task.interface';
 import { TaskModel } from '../../../models/task.model';
-import { Router } from '@angular/router';
 
 
 @Component({
@@ -27,7 +28,6 @@ export class ListTaskComponent implements OnInit {
   getTasks() {
     this.tasksService.getTasks()
       .subscribe((resp: any) => {
-        console.log(resp);
         this.tasks = resp.tasks;
       });
   }
@@ -65,6 +65,16 @@ export class ListTaskComponent implements OnInit {
 
   editTask( id: string ) {
     this.router.navigateByUrl(`/task/edit/${ id }`);
+  }
+
+  playClick( task: Task ) {
+    if (task.optionalMinutes !== 0) {
+      this.tasksService.timer = task.optionalMinutes;
+    } else {
+      this.tasksService.timer = task.duration;
+    }
+
+    this.tasksService.descriptionTask = task.description;
   }
 
 }

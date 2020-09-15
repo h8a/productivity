@@ -19,13 +19,21 @@
                     <th>Tarea</th>
                     <th>Duración</th>
                     <th style="width: 150px">Acciones</th>
+                    <th style="width: 50px">Estatus</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let task of tasks, let i = index">
                     <td>{{ i +1 }}</td>
                     <td>{{ task.description }}</td>
-                    <td>Minutos: {{ task.optionalMinutes }}:{{ task.optionalSeconds }}</td>
+                    <td>
+                      <div *ngIf="task.duration === 0">
+                        Minutos: {{ task.optionalMinutes }}:{{ task.optionalSeconds }}
+                      </div>
+                      <div *ngIf="task.duration !== 0">
+                        Minutos: {{ task.duration }}
+                      </div>
+                    </td>
                     <td>
                         <div class="row">
                             <div class="col-6">
@@ -37,6 +45,12 @@
                                         (click)="deleteTask( task )"><i class="fas fa-trash-alt"></i></button>
                             </div>
                         </div>
+                    </td>
+                    <td class="d-flex justify-content-lg-around">
+                      <button class="btn btn-primary"
+                              (click)="playClick( task )">
+                        <i class="fas fa-play"></i>
+                      </button>
                     </td>
                   </tr>
                 </tbody>

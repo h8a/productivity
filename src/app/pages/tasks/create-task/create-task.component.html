@@ -23,7 +23,7 @@
                     <select class="form-control"
                             formControlName="duration">
                       <option value="0">Seleccione un tipo</option>
-                      <option [value]="type.id" *ngFor="let type of optionsTask">{{ type.type }} {{ type.text }}</option>
+                      <option [value]="type.duration" *ngFor="let type of optionsTask">{{ type.type }} {{ type.text }}</option>
                     </select>
                 </div>
                 <div class="form-group row">

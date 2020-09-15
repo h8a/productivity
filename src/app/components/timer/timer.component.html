@@ -1,0 +1,32 @@
+<div class="row d-flex justify-content-lg-around">
+    <div class="col-10 my-2">
+        <div class="card">
+            <div class="row my-2">
+                <div class="col d-flex justify-content-md-around ">
+                    <button class="btn btn-warning"
+                            (click)="pauseClick()">
+                        <i class="fas fa-pause"></i>
+                    </button>
+                    <button class="btn btn-secondary"
+                            (click)="stopClick()">
+                        <i class="fas fa-stop"></i>
+                    </button>
+                    <button class="btn btn-primary"
+                            (click)="playClick()">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="btn btn-success"
+                            (click)="restartClick()">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                </div>
+                <div class="col">
+                    <h2>Descripción: {{ description }}</h2>
+                </div>
+                <div class="col">
+                    <h2>Duración: {{ progress }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

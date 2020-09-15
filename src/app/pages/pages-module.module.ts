@@ -6,12 +6,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
-import { HeaderComponent } from '../shared/header/header.component';
-import { SidebarComponent } from '../shared/sidebar/sidebar.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { CreateTaskComponent } from './tasks/create-task/create-task.component';
 import { ListTaskComponent } from './tasks/list-task/list-task.component';
 import { EditTaskComponent } from './tasks/edit-task/edit-task.component';
+import { SharedModuleModule } from '../shared/shared-module.module';
 
 
 
@@ -19,8 +18,6 @@ import { EditTaskComponent } from './tasks/edit-task/edit-task.component';
   declarations: [
     DashboardComponent,
     PagesComponent,
-    HeaderComponent,
-    SidebarComponent,
     CreateTaskComponent,
     ListTaskComponent,
     EditTaskComponent,
@@ -32,6 +29,7 @@ import { EditTaskComponent } from './tasks/edit-task/edit-task.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModuleModule
   ]
 })
 export class PagesModuleModule { }
