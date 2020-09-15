@@ -45,7 +45,6 @@ export class CreateTaskComponent implements OnInit {
   getTaskType() {
     this.tasksService.getTaskType()
       .subscribe((resp: any) => {
-        console.log(resp);
         this.optionsTask = resp.types;
       });
   }
