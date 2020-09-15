@@ -68,14 +68,20 @@ export class ListTaskComponent implements OnInit {
 
   playClick( task: TaskModel ) {
     if (task.optionalMinutes !== 0) {
-      this.tasksService.timer = task.optionalMinutes;
+
+      if ( task.optionalSeconds > 0  && task.optionalMinutes > 0) {
+        this.tasksService.timer = (task.optionalMinutes * 60) + task.optionalSeconds;
+      } else if ( task.optionalMinutes > 0 && task.optionalSeconds === 0 ) {
+        this.tasksService.timer = task.optionalMinutes * 60;
+      } else if ( task.optionalMinutes === 0 && task.optionalSeconds > 0 ) {
+        this.tasksService.timer = task.optionalSeconds;
+      }
+
     } else {
-      this.tasksService.timer = task.duration;
+      this.tasksService.timer = task.duration * 60;
     }
 
     this.tasksService.descriptionTask = task.description;
-
-    console.log(this.tasks);
 
     this.tasks = [task, ...this.tasks.filter(item => item.id !== task.id)];
   }
