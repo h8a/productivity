@@ -18,6 +18,7 @@
                     <th style="width: 10px">#</th>
                     <th>Tarea</th>
                     <th>Duración</th>
+                    <th>Tiempo transcurrido</th>
                     <th style="width: 150px">Acciones</th>
                     <th style="width: 50px">Estatus</th>
                   </tr>
@@ -26,13 +27,9 @@
                   <tr *ngFor="let task of tasks, let i = index">
                     <td>{{ i +1 }}</td>
                     <td>{{ task.description }}</td>
+                    <td>{{ task | time:'seconds' }}</td>
                     <td>
-                      <div *ngIf="task.duration === 0">
-                        Minutos: {{ task.optionalMinutes }}:{{ task.optionalSeconds }}
-                      </div>
-                      <div *ngIf="task.duration !== 0">
-                        Minutos: {{ task.duration }}
-                      </div>
+                      {{ task | time:'minutes' }}
                     </td>
                     <td>
                         <div class="row">

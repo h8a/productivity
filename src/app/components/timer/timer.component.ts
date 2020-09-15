@@ -52,7 +52,7 @@ export class TimerComponent implements OnInit, OnDestroy {
 
     this.timerObserver = {
       next: (_: number) => {
-        if(this.progressTimer < 7201 && this.progressTimer > 0) {
+        if(this.progressTimer > 0) {
           this.progressTimer -= 1;
           this.getProgress();
         } else {
@@ -91,13 +91,9 @@ export class TimerComponent implements OnInit, OnDestroy {
 
   getProgress() {
 
-    console.log(this.progressTimer);
-
     const minutes = Math.floor( this.progressTimer / 60 );
 
     this.progress = `${ ('00' + minutes).slice(-2) }:${ ('00' + Math.floor(this.progressTimer - minutes * 60)).slice(-2) }`;
-
-    // this.progress = `${ this.progressTimer }`;
   }
 
 }
