@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 import { TasksService } from '../../../services/tasks.service';
-import { Task } from '../../../interfaces/task.interface';
 import { TaskModel } from '../../../models/task.model';
 
 
@@ -67,7 +66,7 @@ export class ListTaskComponent implements OnInit {
     this.router.navigateByUrl(`/task/edit/${ id }`);
   }
 
-  playClick( task: Task ) {
+  playClick( task: TaskModel ) {
     if (task.optionalMinutes !== 0) {
       this.tasksService.timer = task.optionalMinutes;
     } else {
@@ -75,6 +74,9 @@ export class ListTaskComponent implements OnInit {
     }
 
     this.tasksService.descriptionTask = task.description;
-  }
 
+    console.log(this.tasks);
+
+    this.tasks = [task, ...this.tasks.filter(item => item.id !== task.id)];
+  }
 }
