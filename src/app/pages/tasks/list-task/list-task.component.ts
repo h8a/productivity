@@ -32,7 +32,6 @@ export class ListTaskComponent implements OnInit {
   }
 
   deleteTask( task: TaskModel ) {
-    console.log(task);
     Swal.fire({
       title: 'Eliminar tarea',
       text: `¿ Eliminar tarea: ${ task.description } duracion: ${ task.optionalMinutes }:${ task.optionalSeconds } ?`,
