@@ -31,13 +31,6 @@ export class TimerComponent implements OnInit, OnDestroy {
     this.getTask();
 
     this.getProgress();
-
-    setTimeout(() => {
-      if (!this.isRunning) {
-        this.getProgress();
-        console.log('entro');
-      }
-    }, 1000);
   }
 
   ngOnDestroy(): void {
@@ -59,7 +52,7 @@ export class TimerComponent implements OnInit, OnDestroy {
 
     this.timerObserver = {
       next: (_: number) => {
-        if(this.progressTimer < 121 && this.progressTimer > 0) {
+        if(this.progressTimer < 7201 && this.progressTimer > 0) {
           this.progressTimer -= 1;
           this.getProgress();
         } else {
@@ -97,7 +90,14 @@ export class TimerComponent implements OnInit, OnDestroy {
   }
 
   getProgress() {
-    this.progress = `${ this.progressTimer }`;
+
+    console.log(this.progressTimer);
+
+    const minutes = Math.floor( this.progressTimer / 60 );
+
+    this.progress = `${ ('00' + minutes).slice(-2) }:${ ('00' + Math.floor(this.progressTimer - minutes * 60)).slice(-2) }`;
+
+    // this.progress = `${ this.progressTimer }`;
   }
 
 }
