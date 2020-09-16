@@ -19,7 +19,10 @@ export class TimePipe implements PipeTransform {
         // const minutes = Math.floor( totalTime / 60 );
         // return `${ ('00' + minutes).slice(-2) }:${ ('00' + Math.floor(totalTime - minutes * 60)).slice(-2) }`;
       } else {
-        return `${ task.duration }`;
+        const totalTime = task.duration * 60;
+        const hours = Math.floor(totalTime / 3600);
+        const minutes = Math.floor((totalTime % 3600) / 60);
+        return `${ ('00' + hours).slice(-2) }:${ ('00' + minutes).slice(-2) }:${ ('00' + Math.floor(totalTime - minutes * 60)).slice(-2) }`;
       }
     } else if (type === 'seconds') {
       const hours = Math.floor(task.status_time / 3600);

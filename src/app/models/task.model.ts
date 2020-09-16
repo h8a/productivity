@@ -8,6 +8,6 @@ export class TaskModel {
     status_time: number;
     status_task: string;
     duration: number;
-    id: string;
+    id?: string;
     to_play: number;
 }
