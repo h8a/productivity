@@ -27,10 +27,8 @@
                   <tr *ngFor="let task of tasks, let i = index">
                     <td>{{ i +1 }}</td>
                     <td>{{ task.description }}</td>
+                    <td>{{ task | time:'minutes' }}</td>
                     <td>{{ task | time:'seconds' }}</td>
-                    <td>
-                      {{ task | time:'minutes' }}
-                    </td>
                     <td>
                         <div class="row">
                             <div class="col-6">
@@ -46,7 +44,7 @@
                     <td class="d-flex justify-content-lg-around">
                       <button class="btn btn-primary"
                               (click)="playClick( task )">
-                        <i class="fas fa-play"></i>
+                        <i class="fas fa-stopwatch"></i>
                       </button>
                     </td>
                   </tr>

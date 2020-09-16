@@ -12,6 +12,7 @@ export class TasksService {
   private baseUrl = environment.baseUrl;
   public timer = 0;
   public descriptionTask = '';
+  public taskId: string;
 
   constructor( private http: HttpClient ) { }
 

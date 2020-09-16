@@ -28,6 +28,7 @@ export class ListTaskComponent implements OnInit {
     this.tasksService.getTasks()
       .subscribe((resp: any) => {
         this.tasks = resp.tasks;
+        console.log(this.tasks);
       });
   }
 
@@ -66,8 +67,9 @@ export class ListTaskComponent implements OnInit {
   }
 
   playClick( task: TaskModel ) {
-    if (task.optionalMinutes !== 0) {
-
+    if (task.to_play > 0){
+      this.tasksService.timer = task.to_play;
+    } else if (task.optionalMinutes !== 0) {
       if ( task.optionalSeconds > 0  && task.optionalMinutes > 0) {
         this.tasksService.timer = (task.optionalMinutes * 60) + task.optionalSeconds;
       } else if ( task.optionalMinutes > 0 && task.optionalSeconds === 0 ) {
@@ -81,6 +83,7 @@ export class ListTaskComponent implements OnInit {
     }
 
     this.tasksService.descriptionTask = task.description;
+    this.tasksService.taskId = task.id;
 
     this.tasks = [task, ...this.tasks.filter(item => item.id !== task.id)];
   }

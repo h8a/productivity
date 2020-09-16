@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { interval, Observable, PartialObserver, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TasksService } from '../../services/tasks.service';
+import { TaskModel } from '../../models/task.model';
 
 @Component({
   selector: 'app-timer',
@@ -16,6 +17,8 @@ export class TimerComponent implements OnInit, OnDestroy {
   private isRunning = true;
   private isComplete = false;
   public description = '';
+  private baseTime: number;
+  private task: TaskModel;
 
   timer$: Observable<number>;
   timerObserver: PartialObserver<number>;
@@ -28,7 +31,6 @@ export class TimerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getTask();
 
     this.getProgress();
   }
@@ -38,10 +40,8 @@ export class TimerComponent implements OnInit, OnDestroy {
 
   playClick() {
 
-    this.getTask();
-
-    if (this.isRunning) {
-      this.restartClick();
+    if (!this.task) {
+      this.getTask();
     }
 
     this.timer$ = interval(1000)
@@ -65,21 +65,31 @@ export class TimerComponent implements OnInit, OnDestroy {
 
     this.isRunning = true;
     this.timer$.subscribe(this.timerObserver);
+
   }
 
   pauseClick() {
     this.pauseClick$.next();
     this.isRunning = false;
+    this.baseTime = this.tasksService.timer - this.progressTimer;
   }
 
   restartClick() {
 
     this.getTask();
+    this.baseTime = this.tasksService.timer;
   }
 
   getTask() {
     this.progressTimer = this.tasksService.timer;
+    this.baseTime = this.tasksService.timer;
     this.description = this.tasksService.descriptionTask;
+    if (this.tasksService.taskId) {
+      this.tasksService.getTask(Number(this.tasksService.taskId))
+      .subscribe((resp: any) => {
+        this.task = resp.task;
+      });
+    }
   }
 
   stopClick() {
@@ -91,9 +101,9 @@ export class TimerComponent implements OnInit, OnDestroy {
 
   getProgress() {
 
-    const minutes = Math.floor( this.progressTimer / 60 );
+    const hours = Math.floor(this.progressTimer / 3600);
+    const minutes = Math.floor((this.progressTimer % 3600) / 60 );
 
-    this.progress = `${ ('00' + minutes).slice(-2) }:${ ('00' + Math.floor(this.progressTimer - minutes * 60)).slice(-2) }`;
+    this.progress = `${ ('00' + hours).slice(-2) }:${ ('00' + minutes).slice(-2) }:${ ('00' + Math.floor(this.progressTimer - minutes * 60)).slice(-2) }`;
   }
-
 }

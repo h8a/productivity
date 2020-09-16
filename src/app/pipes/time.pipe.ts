@@ -11,16 +11,22 @@ export class TimePipe implements PipeTransform {
     if (type === 'minutes') {
       if ( task.duration === 0 ) {
 
-        const totalTime = (task.optionalMinutes * 60) + task.optionalSeconds;
+        const totalTime = task.optionalMinutes  + task.optionalSeconds;
 
-        const minutes = Math.floor( totalTime / 60 );
-        return `${ ('00' + minutes).slice(-2) }:${ ('00' + Math.floor(totalTime - minutes * 60)).slice(-2) }`;
+        const hours = Math.floor(totalTime / 3600);
+        const minutes = Math.floor((totalTime % 3600) / 60);
+        return `${ ('00' + hours).slice(-2) }:${ ('00' + minutes).slice(-2) }:${ ('00' + Math.floor(totalTime - minutes * 60)).slice(-2) }`;
+        // const minutes = Math.floor( totalTime / 60 );
+        // return `${ ('00' + minutes).slice(-2) }:${ ('00' + Math.floor(totalTime - minutes * 60)).slice(-2) }`;
       } else {
-        return `${ ('00' + task.duration).slice(-2) }:00`;
+        return `${ task.duration }`;
       }
     } else if (type === 'seconds') {
-      const minutes = Math.floor( task.status_time / 60 );
-      return `${ ('00' + minutes).slice(-2) }:${ ('00' + Math.floor(task.status_time - minutes * 60)).slice(-2) }`;
+      const hours = Math.floor(task.status_time / 3600);
+      const minutes = Math.floor((task.status_time % 3600) / 60);
+      return `${ ('00' + hours).slice(-2) }:${ ('00' + minutes).slice(-2) }:${ ('00' + Math.floor(task.status_time - minutes * 60)).slice(-2) }`;
+      // const minutes = Math.floor( task.status_time / 60 );
+      // return `${ ('00' + minutes).slice(-2) }:${ ('00' + Math.floor(task.status_time - minutes * 60)).slice(-2) }`;
     } else {
       return 'invalid format';
     }
