@@ -41,7 +41,7 @@ export class CreateTaskComponent implements OnInit {
 
     if ( this.taskForm.invalid ) { return; }
 
-    if (!this.taskForm.controls.duration.errors) {
+    if (this.taskForm.controls.duration.value > 0) {
       this.to_play = this.taskForm.controls.duration.value * 60;
     } else {
       this.to_play = (this.taskForm.controls.optionalMinutes.value * 60) + this.taskForm.controls.optionalSeconds.value;

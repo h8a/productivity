@@ -10,8 +10,7 @@ export class TimePipe implements PipeTransform {
 
     if (type === 'minutes') {
       if ( task.duration === 0 ) {
-
-        const totalTime = task.optionalMinutes  + task.optionalSeconds;
+        const totalTime = (task.optionalMinutes * 60)  + task.optionalSeconds;
 
         const hours = Math.floor(totalTime / 3600);
         const minutes = Math.floor((totalTime % 3600) / 60);
