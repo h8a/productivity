@@ -19,6 +19,8 @@
     "@angular/platform-browser": "~9.1.11",
     "@angular/platform-browser-dynamic": "~9.1.11",
     "@angular/router": "~9.1.11",
+    "chart.js": "^2.9.3",
+    "ng2-charts": "^2.4.1",
     "ngx-datetime-picker": "^3.0.0",
     "rxjs": "~6.5.4",
     "sweetalert2": "^10.0.2",

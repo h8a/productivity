@@ -1,0 +1,52 @@
+<div class="row mx-2">
+    <section class="col-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Tareas pendientes</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let task of pendingTasksList, let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ task.description }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </section>
+    <section class="col-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Tareas completadas</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let task of completeTasksList, let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ task.description }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </section>
+</div>

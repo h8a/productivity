@@ -41,4 +41,12 @@ export class TasksService {
   deleteTask( id: string ) {
     return this.http.delete(`${ this.baseUrl }/task/delete/${ id }`);
   }
+
+  pendingTasks() {
+    return this.http.get(`${ this.baseUrl }/task/pending`);
+  }
+
+  completeTasks() {
+    return this.http.get(`${ this.baseUrl }/task/complete`);
+  }
 }

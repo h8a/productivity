@@ -12,6 +12,7 @@ import { ListTaskComponent } from './tasks/list-task/list-task.component';
 import { EditTaskComponent } from './tasks/edit-task/edit-task.component';
 import { SharedModuleModule } from '../shared/shared-module.module';
 import { PipesModule } from '../pipes/pipes.module';
+import { ComponentsModule } from '../components/components.module';
 
 
 
@@ -32,6 +33,7 @@ import { PipesModule } from '../pipes/pipes.module';
     ReactiveFormsModule,
     SharedModuleModule,
     PipesModule,
+    ComponentsModule,
   ]
 })
 export class PagesModuleModule { }
