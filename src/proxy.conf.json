@@ -1,6 +1,7 @@
 {
     "/api/*": {
-        "target": "http://localhost:8080",
+        "target": "https://api.productivity.researchdev.xyz/api",
+        "changeOrigin": true,
         "secure": false,
         "logLevel": "debug"
     }
