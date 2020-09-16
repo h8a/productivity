@@ -17,7 +17,6 @@ export class TimerComponent implements OnInit, OnDestroy {
   private isRunning = true;
   private isComplete = false;
   public description = '';
-  private baseTime: number;
   private task: TaskModel;
   public taskReady = false;
 
@@ -28,7 +27,6 @@ export class TimerComponent implements OnInit, OnDestroy {
   pauseClick$ = new Subject();
 
   constructor( private tasksService: TasksService ) {
-    // this.getTask();
   }
 
   ngOnInit(): void {
@@ -66,12 +64,18 @@ export class TimerComponent implements OnInit, OnDestroy {
 
     this.isRunning = true;
     this.timer$.subscribe(this.timerObserver);
+
+    if (this.task) {
+      this.task.status_task = 'play';
+      this.tasksService.editTask(this.task)
+        .subscribe();
+    }
   }
 
   pauseClick() {
+    this.getProgress();
     this.pauseClick$.next();
     this.isRunning = false;
-    this.baseTime = this.tasksService.timer - this.progressTimer;
 
     this.task.status_task = 'pause';
     this.tasksService.editTask(this.task)
@@ -81,7 +85,6 @@ export class TimerComponent implements OnInit, OnDestroy {
   restartClick() {
 
     this.getTask();
-    this.baseTime = this.tasksService.timer;
 
     this.task.status_task = 'restart';
     this.tasksService.editTask(this.task)
@@ -90,13 +93,12 @@ export class TimerComponent implements OnInit, OnDestroy {
 
   getTask() {
     this.progressTimer = this.tasksService.timer;
-    this.baseTime = this.tasksService.timer;
     this.description = this.tasksService.descriptionTask;
     if (this.tasksService.taskId) {
       this.tasksService.getTask(Number(this.tasksService.taskId))
         .subscribe((resp: any) => {
           this.task = resp.task;
-          this.taskReady = this.tasksService.taskReady;
+          this.taskReady = true;
         });
     }
   }

@@ -28,7 +28,6 @@ export class ListTaskComponent implements OnInit {
     this.tasksService.getTasks()
       .subscribe((resp: any) => {
         this.tasks = resp.tasks;
-        console.log(this.tasks);
       });
   }
 
@@ -84,7 +83,6 @@ export class ListTaskComponent implements OnInit {
 
     this.tasksService.descriptionTask = task.description;
     this.tasksService.taskId = task.id;
-    this.tasksService.taskReady = false;
 
     this.tasks = [task, ...this.tasks.filter(item => item.id !== task.id)];
   }

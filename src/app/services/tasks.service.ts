@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Task } from '../interfaces/task.interface';
 import { TaskModel } from '../models/task.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class TasksService {
   public timer = 0;
   public descriptionTask = '';
   public taskId: string;
-  public taskReady = false;
+  public tasks: TaskModel[] = [];
 
   constructor( private http: HttpClient ) { }
 

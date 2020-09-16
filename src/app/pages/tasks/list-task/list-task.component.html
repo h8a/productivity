@@ -19,8 +19,7 @@
                     <th>Tarea</th>
                     <th>Duración</th>
                     <th>Tiempo transcurrido</th>
-                    <th style="width: 150px">Acciones</th>
-                    <th style="width: 50px">Estatus</th>
+                    <th style="width: 250px">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -31,21 +30,21 @@
                     <td>{{ task | time:'seconds' }}</td>
                     <td>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-4">
                                 <button class="btn btn-primary"
                                         (click)="editTask( task.id )"><i class="fas fa-edit"></i></button>
                             </div>
-                            <div class="col-6">
+                            <div class="col-4">
                                 <button class="btn btn-danger"
                                         (click)="deleteTask( task )"><i class="fas fa-trash-alt"></i></button>
                             </div>
+                            <div class="col-4">
+                              <button class="btn btn-primary"
+                                      (click)="playClick( task )">
+                                <i class="fas fa-stopwatch"></i>
+                              </button>
+                            </div>
                         </div>
-                    </td>
-                    <td class="d-flex justify-content-lg-around">
-                      <button class="btn btn-primary"
-                              (click)="playClick( task )">
-                        <i class="fas fa-stopwatch"></i>
-                      </button>
                     </td>
                   </tr>
                 </tbody>
