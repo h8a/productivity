@@ -19,6 +19,7 @@ export class TimerComponent implements OnInit, OnDestroy {
   public description = '';
   private baseTime: number;
   private task: TaskModel;
+  public taskReady = false;
 
   timer$: Observable<number>;
   timerObserver: PartialObserver<number>;
@@ -27,7 +28,7 @@ export class TimerComponent implements OnInit, OnDestroy {
   pauseClick$ = new Subject();
 
   constructor( private tasksService: TasksService ) {
-    this.getTask();
+    // this.getTask();
   }
 
   ngOnInit(): void {
@@ -40,7 +41,7 @@ export class TimerComponent implements OnInit, OnDestroy {
 
   playClick() {
 
-    if (!this.task) {
+    if (!this.taskReady) {
       this.getTask();
     }
 
@@ -65,19 +66,26 @@ export class TimerComponent implements OnInit, OnDestroy {
 
     this.isRunning = true;
     this.timer$.subscribe(this.timerObserver);
-
   }
 
   pauseClick() {
     this.pauseClick$.next();
     this.isRunning = false;
     this.baseTime = this.tasksService.timer - this.progressTimer;
+
+    this.task.status_task = 'pause';
+    this.tasksService.editTask(this.task)
+      .subscribe();
   }
 
   restartClick() {
 
     this.getTask();
     this.baseTime = this.tasksService.timer;
+
+    this.task.status_task = 'restart';
+    this.tasksService.editTask(this.task)
+      .subscribe();
   }
 
   getTask() {
@@ -86,9 +94,10 @@ export class TimerComponent implements OnInit, OnDestroy {
     this.description = this.tasksService.descriptionTask;
     if (this.tasksService.taskId) {
       this.tasksService.getTask(Number(this.tasksService.taskId))
-      .subscribe((resp: any) => {
-        this.task = resp.task;
-      });
+        .subscribe((resp: any) => {
+          this.task = resp.task;
+          this.taskReady = this.tasksService.taskReady;
+        });
     }
   }
 
@@ -97,6 +106,10 @@ export class TimerComponent implements OnInit, OnDestroy {
     this.getProgress();
     this.stopClick$.next();
     this.isRunning = false;
+
+    this.task.status_task = 'stop';
+    this.tasksService.editTask(this.task)
+      .subscribe();
   }
 
   getProgress() {

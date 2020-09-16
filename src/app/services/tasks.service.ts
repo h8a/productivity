@@ -13,6 +13,7 @@ export class TasksService {
   public timer = 0;
   public descriptionTask = '';
   public taskId: string;
+  public taskReady = false;
 
   constructor( private http: HttpClient ) { }
 
